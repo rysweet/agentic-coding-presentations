@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursive, Reflective Robots Reap Real Rewards</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css" id="theme">
+<style>
+  :root {
+    --dk1: #000000;
+    --dk2: #0E2841;
+    --accent1: #156082;
+    --accent2: #E97132;
+    --accent3: #196B24;
+    --accent4: #0F9ED5;
+    --accent5: #A02B93;
+    --lt2: #E8E8E8;
+  }
+  .reveal {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  }
+  .reveal .slides section {
+    text-align: left;
+    padding: 40px 60px;
+  }
+  .reveal h1, .reveal h2, .reveal h3 {
+    text-transform: none;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .reveal h1 { font-size: 2.2em; color: #fff; }
+  .reveal h2 { font-size: 1.6em; color: var(--accent4); margin-bottom: 0.5em; }
+  .reveal h3 { font-size: 1.2em; color: var(--accent2); }
+  .reveal p, .reveal li {
+    font-size: 0.75em;
+    line-height: 1.5;
+    color: #ddd;
+  }
+  .reveal ul { margin-left: 1em; }
+  .reveal li { margin-bottom: 0.3em; }
+  .reveal a { color: var(--accent4); text-decoration: underline; }
+  .reveal a:hover { color: var(--accent2); }
+  .reveal .slide-number { font-size: 14px; }
+
+  /* Title slide */
+  .title-slide { text-align: center !important; }
+  .title-slide h1 { font-size: 2em; margin-bottom: 0.2em; color: #fff; }
+  .title-slide .subtitle { font-size: 0.9em; color: var(--accent4); margin-bottom: 1em; }
+  .title-slide .author { font-size: 0.7em; color: #aaa; }
+
+  /* Image slides */
+  .image-slide { text-align: center !important; }
+  .image-slide img {
+    max-height: 70vh;
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  /* Two-column layout */
+  .two-col {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .two-col .col { flex: 1; }
+  .two-col .col-img { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .two-col .col-img img {
+    max-height: 55vh;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  /* Quote/callout slides */
+  .callout {
+    font-size: 1.4em !important;
+    text-align: center !important;
+    font-style: italic;
+    color: var(--accent2) !important;
+    padding: 60px 80px !important;
+    line-height: 1.6 !important;
+  }
+  .callout-slide { text-align: center !important; }
+  .callout-slide .callout-text {
+    font-size: 1.3em;
+    font-style: italic;
+    color: var(--accent2);
+    line-height: 1.6;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  /* Emphasis text */
+  em, .emphasis { color: var(--accent2); font-style: normal; font-weight: 600; }
+  strong { color: #fff; }
+
+  /* Tip slides */
+  .tip-badge {
+    display: inline-block;
+    background: var(--accent2);
+    color: #fff;
+    padding: 4px 16px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- Slide 1: Title -->
+<section class="title-slide" data-background-image="images/image1.png" data-background-size="cover" data-background-opacity="0.25">
+  <h1>Recursive, Reflective Robots Reap Real Rewards</h1>
+  <p class="subtitle">How to iterate on quality in large scale AI coding projects</p>
+  <p class="author">Ryan Sweet · rysweet@microsoft.com · March 2026</p>
+</section>
+
+<!-- Slide 2: Coding Agents are Terrible -->
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Coding Agents are Terrible!</h2>
+      <p>By default – they have lots of failure modes – they are just regurgitating the internet.</p>
+      <p>They are trained on <strong>LOTS</strong> of terrible code AND on some very excellent code.</p>
+      <p>Your chances of getting the terrible code are relative to its proportionality in the training set.</p>
+      <p><em>Guess how common terrible code is on the internet?</em></p>
+    </div>
+    <div class="col-img">
+      <img src="images/image2.png" alt="Coding agents failure modes">
+    </div>
+  </div>
+</section>
+
+<!-- Slide 3: Coding Agents are Amazing -->
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Coding Agents are Amazing!</h2>
+      <p>They can take the <strong>best code on the internet</strong> and make it available instantly AND they can reason over it, with your help.</p>
+      <p><em>Your job as an engineer is to help them converge on the good code.</em></p>
+    </div>
+    <div class="col-img">
+      <img src="images/image3.png" alt="Coding agents amazing capabilities">
+    </div>
+  </div>
+</section>
+
+<!-- Slide 4: How do I get to Quality? -->
+<section>
+  <h2>But it produces garbage! How do I get to Quality?</h2>
+  <ul>
+    <li>Setting High Standards</li>
+    <li>Encoding Best Practices</li>
+    <li>Recursion, Reflection, and Repetition</li>
+    <li>Outside-in-testing</li>
+  </ul>
+</section>
+
+<!-- Slide 5: Laying a Foundation -->
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Laying a Foundation</h2>
+      <p>Write down your <em>development philosophy</em> – e.g.:</p>
+      <ul>
+        <li><strong>Ruthless Simplicity</strong></li>
+        <li>Small, modular bricks that fit together</li>
+        <li><strong>Zero BS:</strong> No stubs, no placeholders, no faked data, no faked APIs, no TODOs</li>
+        <li>Core e2e journeys and data flows early</li>
+        <li>Iterative implementation</li>
+      </ul>
+      <p><a href="https://github.com/rysweet/amplihack/blob/main/.claude/context/PHILOSOPHY.md" target="_blank">→ Example: PHILOSOPHY.md</a></p>
+    </div>
+    <div class="col-img">
+      <img src="images/image4.png" alt="Development philosophy">
+    </div>
+  </div>
+</section>
+
+<!-- Slide 6: Avoid Context Poisoning -->
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2><span class="tip-badge">Tip</span> Avoid Context Poisoning!</h2>
+      <p>Point-in-time documents and unrelated logs, reports, summaries etc. all <em>distract your agents</em>.</p>
+    </div>
+    <div class="col-img">
+      <img src="images/image5.png" alt="Context poisoning">
+    </div>
+  </div>
+</section>
+
+<!-- Slide 7: Build lots of Guardrails -->
+<section>
+  <h2>Build lots of Guardrails</h2>
+  <p>Modern dev has dozens of tools to keep things working smoothly.</p>
+  <p><strong>Require pre-commit:</strong> linting, formatting, type-safety, secrets prevention, build/testing, and coverage.</p>
+  <h3>In CI:</h3>
+  <ul>
+    <li>Code Coverage</li>
+    <li>Secrets Scanning</li>
+    <li>Build/Test</li>
+    <li>Integration Testing</li>
+    <li>Dependency management</li>
+    <li>Repo Hygiene and Maintenance</li>
+  </ul>
+</section>
+
+<!-- Slide 8: GitHub Agentic Workflows -->
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>GitHub Agentic Workflows!</h2>
+      <p>Agents can continuously clean, improve, and curate your repo.</p>
+      <p><a href="https://github.github.com/gh-aw/" target="_blank">GH-AW</a> lets you build natural language driven agents that can perform a massive array of tasks.</p>
+      <p>E.g.: <em>Repo Guardian</em> – prevents context poisoning by keeping point-in-time docs out of the repo.</p>
+      <p>Other use cases: docs maintenance, issue triage and labelling, PR hygiene, etc.</p>
+      <p><a href="https://github.com/rysweet/amplihack/blob/main/.github/workflows/repo-guardian.md" target="_blank">→ Repo Guardian workflow</a></p>
+    </div>
+    <div class="col-img">
+      <img src="images/image6.png" alt="GitHub Agentic Workflows">
+    </div>
+  </div>
+</section>
+
+<!-- Slide 9: Event Driven System -->
+<section class="image-slide">
+  <h2>Think of your repo as an event driven system</h2>
+  <p style="text-align:center;">Every change is a chance to trigger new work.</p>
+  <img src="images/image7.png" alt="Event driven system diagram">
+</section>
+
+<!-- Slide 10: Continuous Iterative Goal -->
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Frame quality improvement as a continuous iterative goal</h2>
+      <ul>
+        <li>Have dialogues with the coding assistant and with the repo itself about how you might add new procedures</li>
+        <li>Delegating goal pursuit changes how you think about solving the problem</li>
+      </ul>
+      <p><strong>Weekly Practice:</strong> <em>How else can agents help in my repo?</em></p>
+    </div>
+    <div class="col-img">
+      <img src="images/image8.png" alt="Continuous improvement">
+    </div>
+  </div>
+</section>
+
+<!-- Slide 11: Virtual Dev Team -->
+<section>
+  <h2>How do non-AI dev teams ensure quality?</h2>
+  <p>Encode your <a href="https://github.com/rysweet/amplihack/blob/main/.claude/workflow/DEFAULT_WORKFLOW.md" target="_blank">development workflows</a> into the AI work.</p>
+  <p>Use <a href="https://github.com/rysweet/amplihack/tree/main/.claude/agents/amplihack" target="_blank">Subagents</a> as your virtual team:</p>
+  <ul>
+    <li>Spec reviews, code research, eval options, build some prototypes</li>
+    <li>Refine the prototypes, scope an e2e</li>
+    <li><strong>Test-Driven Dev:</strong> write failing tests for everything</li>
+    <li>Iterate to make the tests pass</li>
+    <li>Refactor/Test/Refactor in a loop</li>
+    <li>Code Review</li>
+    <li>Integration Testing</li>
+    <li>…and probably many more steps specific to your team</li>
+  </ul>
+</section>
+
+<!-- Slide 12: Cowboy Coding -->
+<section>
+  <div class="two-col">
+    <div class="col callout-slide">
+      <h2>"But I wrote it down and the model just committed to main and went cowboy!"</h2>
+      <p class="callout-text">You have to <em>constantly reinforce</em> the best practices and the workflows.</p>
+    </div>
+    <div class="col-img">
+      <img src="images/image9.png" alt="Cowboy coding">
+    </div>
+  </div>
+</section>
+
+<!-- Slide 13: Watch for skipping -->
+<section class="image-slide">
+  <p><span class="tip-badge">Tip</span></p>
+  <p style="font-size:1.1em; text-align:center; max-width:80%; margin:0 auto;">Always watch for the model skipping your instructions – ask it repeatedly if it followed the workflow, used the correct tool, etc.</p>
+  <img src="images/image10.jpeg" alt="Watch for skipping instructions">
+</section>
+
+<!-- Slide 14: Moving from Guidance to Code -->
+<section>
+  <h2>Moving from Guidance to Code</h2>
+  <ul>
+    <li>Run <a href="https://rysweet.github.io/amplihack/recipes/" target="_blank">deterministic workflows</a></li>
+    <li>Turn small loops into tools or custom agents that use tools</li>
+    <li>Compose loops into workflows that run in code</li>
+    <li>Turn your NL documented workflow into a <a href="https://github.com/rysweet/amplihack/blob/main/amplifier-bundle/recipes/default-workflow.yaml" target="_blank">deterministically evaluated workflow</a> using these loops and tools</li>
+  </ul>
+</section>
+
+<!-- Slide 15: Outside-in Agentic Testing -->
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Build your QA Team: Outside-in Agentic Testing</h2>
+      <p>Define the user and data flows and build agents to exercise them:</p>
+      <ul>
+        <li>Use your spec or your UI design to derive <a href="https://github.com/rysweet/amplihack/tree/main/.claude/skills/e2e-outside-in-test-generator" target="_blank">e2e user flows</a></li>
+        <li>Build agents that simply use your product – the same ways that a user would</li>
+        <li>Build Skills that know how to invoke those agents</li>
+        <li>Build <a href="https://github.com/rysweet/amplihack/tree/main/.claude/skills/outside-in-testing" target="_blank">outside-in-testing</a> into your workflow at multiple stages</li>
+      </ul>
+      <p><a href="https://rysweet.github.io/gadugi-agentic-test/" target="_blank">→ Gadugi Agentic Test</a></p>
+    </div>
+    <div class="col-img">
+      <img src="images/image11.jpeg" alt="Outside-in testing">
+    </div>
+  </div>
+</section>
+
+<!-- Slide 16: Convergence -->
+<section>
+  <h2>Convergence: steering the model to the good code</h2>
+  <p>Have it consider every piece from multiple angles. You must drive multiple <em>quality loops</em> from different points of view:</p>
+  <ul>
+    <li>Did the agent follow the required workflows?</li>
+    <li>Does it match the spec?</li>
+    <li>Is the test correct / testing the right things?</li>
+    <li>Are the docs in sync with the spec and code?</li>
+    <li>Is it adhering to your philosophy?</li>
+    <li>Did it pass pre-commit and CI?</li>
+  </ul>
+  <p>Look for: secure sources/sinks, type-safety, poor exception handling, <a href="https://github.com/rysweet/amplihack/tree/main/.claude/skills/silent-degradation-audit" target="_blank">silent "fallbacks"</a>, stubs, TODOs, faked data, mocks outside tests, fragile regexes, hard-coded values…</p>
+  <p><strong>Must do MULTIPLE passes from MULTIPLE subagents</strong> – layers and layers – until you converge on zero <a href="https://github.com/rysweet/amplihack/blob/main/.claude/skills/quality-audit/SKILL.md" target="_blank">quality discoveries</a>.</p>
+</section>
+
+<!-- Slide 17: Diagram (image-only slide) -->
+<section class="image-slide">
+  <img src="images/image12.png" alt="Quality convergence diagram">
+</section>
+
+<!-- Slide 18: Build Context -->
+<section>
+  <h2>Build Context Specific to your Repo and Tech</h2>
+  <p>The opposite of context poisoning – use <code>Agents.md</code> files or <code>copilot-instructions.md</code> files at strategic locations in the codebase to help build the correct context.</p>
+  <p>Build Skills that are specific to things you are working with and keep them in your repo or in a plugin you use.</p>
+  <p>This is especially important for internal tools/idioms/tech that is outside the training set (e.g.: GQL).</p>
+  <p><a href="https://github.com/rysweet/agent-kgpacks" target="_blank">→ agent-kgpacks</a></p>
+</section>
+
+<!-- Slide 19: Laundry -->
+<section class="image-slide">
+  <h2 style="text-align:center;">Code quality is like laundry</h2>
+  <p style="text-align:center; font-size:1.2em;"><em>you have to do it every day</em></p>
+  <img src="images/image13.png" alt="Code quality is like laundry">
+</section>
+
+<!-- Slide 20: Final Tip -->
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2><span class="tip-badge">Tip</span> Before finishing, stop and ask:</h2>
+      <ul>
+        <li style="font-size:0.85em;">"How else would you improve this PR?"</li>
+        <li style="font-size:0.85em;">"What else could we do to improve quality / resilience / ease of use…?"</li>
+        <li style="font-size:0.85em;">"How could we examine this code even more thoroughly?"</li>
+      </ul>
+    </div>
+    <div class="col-img">
+      <img src="images/image14.png" alt="Ask for improvements">
+    </div>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: true,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    transition: 'slide',
+    backgroundTransition: 'fade',
+  });
+</script>
+</body>
+</html>
