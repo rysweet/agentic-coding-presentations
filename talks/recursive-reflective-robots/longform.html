@@ -25,74 +25,139 @@
     margin: 0;
     padding: 0;
   }
-
-  /* Hero */
-  .hero {
-    text-align: center;
-    padding: 100px 24px 80px;
-    background: linear-gradient(135deg, #0E2841 0%, #0d1117 60%, #15202b 100%);
-    border-bottom: 1px solid var(--border);
-  }
-  .hero h1 {
-    font-size: clamp(2em, 5vw, 3.2em);
-    color: var(--text-bright);
-    margin: 0 0 16px;
-    letter-spacing: -0.02em;
-    font-weight: 800;
-  }
-  .hero .subtitle {
-    font-size: clamp(1em, 2.5vw, 1.3em);
-    color: var(--accent);
-    margin: 0 0 24px;
-  }
-  .hero .meta {
-    font-size: 0.9em;
-    color: var(--muted);
-  }
-  .hero .meta a { color: var(--accent); text-decoration: none; }
-
-  /* Main content */
-  .content {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
-  }
-
-  /* Sections */
-  .section {
-    padding: 60px 0 40px;
-    border-bottom: 1px solid var(--border);
-  }
-  .section:last-child { border-bottom: none; }
-  .section h2 {
-    font-size: 1.8em;
-    color: var(--text-bright);
-    margin: 0 0 20px;
-    letter-spacing: -0.01em;
-  }
-  .section h3 {
-    font-size: 1.2em;
-    color: var(--orange);
-    margin: 24px 0 12px;
-  }
-  .section p { margin: 0 0 16px; }
-  .section ul { margin: 0 0 16px; padding-left: 24px; }
-  .section li { margin-bottom: 8px; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   strong { color: var(--text-bright); }
   em { color: var(--orange); font-style: normal; font-weight: 600; }
   code { background: #1c2128; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
 
-  /* Images */
-  .section-img {
-    margin: 24px 0;
+  /* Version nav */
+  .version-nav {
     text-align: center;
+    padding: 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9em;
   }
-  .section-img img {
+
+  /* Hero / Title poster — mirrors slide 1 */
+  .hero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 32px;
+    background: url('images/image1.webp') center center / cover no-repeat;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 17, 23, 0.78);
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .hero h1 {
+    font-size: clamp(2.2em, 5vw, 3.5em);
+    color: #fff;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    max-width: 900px;
+  }
+  .hero .subtitle {
+    font-size: clamp(1em, 2.5vw, 1.4em);
+    color: var(--accent);
+    margin: 0 0 28px;
+  }
+  .hero .meta { font-size: 1em; color: #aaa; }
+  .hero .meta a { color: var(--accent); }
+
+  /* Content wrapper */
+  .content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 32px;
+    margin: 48px 0;
+  }
+  .toc h3 { margin-top: 0; color: var(--text-bright); }
+  .toc ol { padding-left: 20px; margin: 0; }
+  .toc li { margin-bottom: 6px; }
+
+  /* Slide section — each one is a "slide" laid out as a card */
+  .slide {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .slide:last-of-type { border-bottom: none; }
+  .slide h2 {
+    font-size: 1.8em;
+    color: var(--text-bright);
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  .slide h3 {
+    font-size: 1.2em;
+    color: var(--orange);
+    margin: 20px 0 12px;
+  }
+  .slide p { margin: 0 0 14px; }
+  .slide ul { margin: 0 0 14px; padding-left: 24px; }
+  .slide li { margin-bottom: 6px; }
+
+  /* Two-column: text + image, alternating sides */
+  .two-col {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .two-col.img-right { flex-direction: row; }
+  .two-col.img-left  { flex-direction: row-reverse; }
+  .two-col .col-text { flex: 1; min-width: 0; }
+  .two-col .col-img  {
+    flex: 0 0 42%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .two-col .col-img img {
     max-width: 100%;
     border-radius: 8px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  /* Full-width image (for image-only slides) */
+  .full-img {
+    margin: 24px 0;
+    text-align: center;
+  }
+  .full-img img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  /* Annotation zone — empty space for you to add notes */
+  .annotation {
+    min-height: 48px;
+    margin: 16px 0 0;
+    padding: 16px 0;
+    border-top: 1px dashed var(--border);
+    color: var(--muted);
+    font-size: 0.85em;
+    font-style: italic;
   }
 
   /* Tip callout */
@@ -115,18 +180,18 @@
     margin-bottom: 8px;
   }
 
-  /* Quote / callout block */
+  /* Quote/callout */
   .callout-block {
     text-align: center;
-    padding: 40px 20px;
-    margin: 24px 0;
+    padding: 32px 20px;
+    margin: 16px 0;
   }
   .callout-block .quote {
     font-size: 1.5em;
     font-style: italic;
     color: var(--orange);
     line-height: 1.5;
-    max-width: 640px;
+    max-width: 700px;
     margin: 0 auto 16px;
   }
   .callout-block .follow {
@@ -134,18 +199,6 @@
     color: var(--text);
   }
 
-  /* Full-width image */
-  .full-img {
-    margin: 40px -24px;
-    text-align: center;
-  }
-  .full-img img {
-    max-width: min(100%, 820px);
-    border-radius: 8px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-  }
-
-  /* Back to top */
   .back-top {
     text-align: center;
     padding: 40px;
@@ -153,26 +206,12 @@
     font-size: 0.9em;
   }
 
-  /* TOC */
-  .toc {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px 32px;
-    margin: 40px 0;
-  }
-  .toc h3 { margin-top: 0; color: var(--text-bright); }
-  .toc ol { padding-left: 20px; margin: 0; }
-  .toc li { margin-bottom: 6px; }
-  .toc a { color: var(--accent); }
-
-  /* Nav link between versions */
-  .version-nav {
-    text-align: center;
-    padding: 16px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    font-size: 0.9em;
+  /* Responsive */
+  @media (max-width: 700px) {
+    .two-col, .two-col.img-right, .two-col.img-left {
+      flex-direction: column;
+    }
+    .two-col .col-img { flex: none; width: 100%; }
   }
 </style>
 </head>
@@ -182,7 +221,8 @@
   📊 <a href="index.html">View as slide deck</a> · 📜 You're reading the longform version
 </div>
 
-<div class="hero">
+<!-- SLIDE 1: Title poster -->
+<div class="hero" id="top">
   <h1>Recursive, Reflective Robots Reap Real Rewards</h1>
   <p class="subtitle">How to iterate on quality in large scale AI coding projects</p>
   <p class="meta">Ryan Sweet · <a href="mailto:rysweet@microsoft.com">rysweet@microsoft.com</a> · March 2026</p>
@@ -197,39 +237,57 @@
       <li><a href="#amazing">Coding Agents are Amazing!</a></li>
       <li><a href="#quality">How do I get to Quality?</a></li>
       <li><a href="#foundation">Laying a Foundation</a></li>
+      <li><a href="#context-poisoning">Avoid Context Poisoning</a></li>
       <li><a href="#guardrails">Build lots of Guardrails</a></li>
       <li><a href="#gh-aw">GitHub Agentic Workflows</a></li>
       <li><a href="#event-driven">Your Repo as an Event Driven System</a></li>
       <li><a href="#iterative">Continuous Iterative Quality</a></li>
       <li><a href="#virtual-team">Your Virtual Dev Team</a></li>
-      <li><a href="#reinforce">Constantly Reinforce Best Practices</a></li>
+      <li><a href="#cowboy">Constantly Reinforce Best Practices</a></li>
+      <li><a href="#watch-skipping">Watch for Skipping</a></li>
       <li><a href="#guidance-to-code">Moving from Guidance to Code</a></li>
       <li><a href="#outside-in">Outside-in Agentic Testing</a></li>
       <li><a href="#convergence">Convergence</a></li>
+      <li><a href="#convergence-diagram">Quality Convergence Diagram</a></li>
       <li><a href="#context">Build Context for your Repo</a></li>
-      <li><a href="#closing">Closing Thoughts</a></li>
+      <li><a href="#laundry">Code Quality is Like Laundry</a></li>
+      <li><a href="#closing">Before You Finish</a></li>
     </ol>
   </nav>
 
-  <!-- Section 1: Terrible -->
-  <section class="section" id="terrible">
-    <h2>Coding Agents are Terrible!</h2>
-    <p>By default – they have lots of failure modes – they are just regurgitating the internet.</p>
-    <p>They are trained on <strong>LOTS</strong> of terrible code AND on some very excellent code. Your chances of getting the terrible code are relative to its proportionality in the training set.</p>
-    <p><em>Guess how common terrible code is on the internet?</em></p>
-    <div class="section-img"><img src="images/image2.webp" alt="Coding agents failure modes" loading="lazy"></div>
+  <!-- SLIDE 2: Terrible (image RIGHT) -->
+  <section class="slide" id="terrible">
+    <div class="two-col img-right">
+      <div class="col-text">
+        <h2>Coding Agents are Terrible!</h2>
+        <p>By default – they have lots of failure modes – they are just regurgitating the internet.</p>
+        <p>They are trained on <strong>LOTS</strong> of terrible code AND on some very excellent code. Your chances of getting the terrible code are relative to its proportionality in the training set.</p>
+        <p><em>Guess how common terrible code is on the internet?</em></p>
+      </div>
+      <div class="col-img">
+        <img src="images/image2.webp" alt="Coding agents failure modes" loading="lazy">
+      </div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 2: Amazing -->
-  <section class="section" id="amazing">
-    <h2>Coding Agents are Amazing!</h2>
-    <p>They can take the <strong>best code on the internet</strong> and make it available instantly AND they can reason over it, with your help.</p>
-    <p><em>Your job as an engineer is to help them converge on the good code.</em></p>
-    <div class="section-img"><img src="images/image3.webp" alt="Coding agents capabilities" loading="lazy"></div>
+  <!-- SLIDE 3: Amazing (image LEFT) -->
+  <section class="slide" id="amazing">
+    <div class="two-col img-left">
+      <div class="col-text">
+        <h2>Coding Agents are Amazing!</h2>
+        <p>They can take the <strong>best code on the internet</strong> and make it available instantly AND they can reason over it, with your help.</p>
+        <p><em>Your job as an engineer is to help them converge on the good code.</em></p>
+      </div>
+      <div class="col-img">
+        <img src="images/image3.webp" alt="Coding agents capabilities" loading="lazy">
+      </div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 3: Quality -->
-  <section class="section" id="quality">
+  <!-- SLIDE 4: Quality (no image) -->
+  <section class="slide" id="quality">
     <h2>But it produces garbage! How do I get to Quality?</h2>
     <ul>
       <li>Setting High Standards</li>
@@ -237,31 +295,49 @@
       <li>Recursion, Reflection, and Repetition</li>
       <li>Outside-in-testing</li>
     </ul>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 4: Foundation -->
-  <section class="section" id="foundation">
-    <h2>Laying a Foundation</h2>
-    <p>Write down your <em>development philosophy</em> – e.g.:</p>
-    <ul>
-      <li><strong>Ruthless Simplicity</strong></li>
-      <li>Small, modular bricks that fit together</li>
-      <li><strong>Zero BS:</strong> No stubs, no placeholders, no faked data, no faked APIs, no TODOs</li>
-      <li>Core e2e journeys and data flows early</li>
-      <li>Iterative implementation</li>
-    </ul>
-    <p><a href="https://github.com/rysweet/amplihack/blob/main/.claude/context/PHILOSOPHY.md" target="_blank">→ Example: PHILOSOPHY.md</a></p>
-    <div class="section-img"><img src="images/image4.webp" alt="Development philosophy" loading="lazy"></div>
-
-    <div class="tip">
-      <span class="tip-label">Tip</span>
-      <p>Avoid Context Poisoning! Point-in-time documents and unrelated logs, reports, summaries etc. all <em>distract your agents</em>.</p>
+  <!-- SLIDE 5: Foundation (image RIGHT) -->
+  <section class="slide" id="foundation">
+    <div class="two-col img-right">
+      <div class="col-text">
+        <h2>Laying a Foundation</h2>
+        <p>Write down your <em>development philosophy</em> – e.g.:</p>
+        <ul>
+          <li><strong>Ruthless Simplicity</strong></li>
+          <li>Small, modular bricks that fit together</li>
+          <li><strong>Zero BS:</strong> No stubs, no placeholders, no faked data, no faked APIs, no TODOs</li>
+          <li>Core e2e journeys and data flows early</li>
+          <li>Iterative implementation</li>
+        </ul>
+        <p><a href="https://github.com/rysweet/amplihack/blob/main/.claude/context/PHILOSOPHY.md" target="_blank">→ Example: PHILOSOPHY.md</a></p>
+      </div>
+      <div class="col-img">
+        <img src="images/image4.webp" alt="Development philosophy" loading="lazy">
+      </div>
     </div>
-    <div class="section-img"><img src="images/image5.webp" alt="Context poisoning" loading="lazy"></div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 5: Guardrails -->
-  <section class="section" id="guardrails">
+  <!-- SLIDE 6: Context Poisoning (image LEFT) -->
+  <section class="slide" id="context-poisoning">
+    <div class="two-col img-left">
+      <div class="col-text">
+        <div class="tip">
+          <span class="tip-label">Tip</span>
+          <p>Avoid Context Poisoning! Point-in-time documents and unrelated logs, reports, summaries etc. all <em>distract your agents</em>.</p>
+        </div>
+      </div>
+      <div class="col-img">
+        <img src="images/image5.webp" alt="Context poisoning" loading="lazy">
+      </div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <!-- SLIDE 7: Guardrails (no image) -->
+  <section class="slide" id="guardrails">
     <h2>Build lots of Guardrails</h2>
     <p>Modern dev has dozens of tools to keep things working smoothly.</p>
     <p><strong>Require pre-commit:</strong> linting, formatting, type-safety, secrets prevention, build/testing, and coverage.</p>
@@ -274,39 +350,57 @@
       <li>Dependency management</li>
       <li>Repo Hygiene and Maintenance</li>
     </ul>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 6: GH-AW -->
-  <section class="section" id="gh-aw">
-    <h2>GitHub Agentic Workflows!</h2>
-    <p>Agents can continuously clean, improve, and curate your repo.</p>
-    <p><a href="https://github.github.com/gh-aw/" target="_blank">GH-AW</a> lets you build natural language driven agents that can perform a massive array of tasks.</p>
-    <p>E.g.: <em>Repo Guardian</em> – prevents context poisoning by keeping point-in-time docs out of the repo.</p>
-    <p>Other use cases: docs maintenance, issue triage and labelling, PR hygiene, etc.</p>
-    <p><a href="https://github.com/rysweet/amplihack/blob/main/.github/workflows/repo-guardian.md" target="_blank">→ Repo Guardian workflow</a></p>
-    <div class="section-img"><img src="images/image6.webp" alt="GitHub Agentic Workflows" loading="lazy"></div>
+  <!-- SLIDE 8: GH-AW (image RIGHT) -->
+  <section class="slide" id="gh-aw">
+    <div class="two-col img-right">
+      <div class="col-text">
+        <h2>GitHub Agentic Workflows!</h2>
+        <p>Agents can continuously clean, improve, and curate your repo.</p>
+        <p><a href="https://github.github.com/gh-aw/" target="_blank">GH-AW</a> lets you build natural language driven agents that can perform a massive array of tasks.</p>
+        <p>E.g.: <em>Repo Guardian</em> – prevents context poisoning by keeping point-in-time docs out of the repo.</p>
+        <p>Other use cases: docs maintenance, issue triage and labelling, PR hygiene, etc.</p>
+        <p><a href="https://github.com/rysweet/amplihack/blob/main/.github/workflows/repo-guardian.md" target="_blank">→ Repo Guardian workflow</a></p>
+      </div>
+      <div class="col-img">
+        <img src="images/image6.webp" alt="GitHub Agentic Workflows" loading="lazy">
+      </div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 7: Event Driven -->
-  <section class="section" id="event-driven">
+  <!-- SLIDE 9: Event Driven (image LEFT, full-width) -->
+  <section class="slide" id="event-driven">
     <h2>Think of your repo as an event driven system</h2>
     <p>Every change is a chance to trigger new work.</p>
-    <div class="section-img"><img src="images/image7.webp" alt="Event driven system diagram" loading="lazy"></div>
+    <div class="full-img">
+      <img src="images/image7.webp" alt="Event driven system diagram" loading="lazy">
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 8: Iterative -->
-  <section class="section" id="iterative">
-    <h2>Frame quality improvement as a continuous iterative goal</h2>
-    <ul>
-      <li>Have dialogues with the coding assistant and with the repo itself about how you might add new procedures</li>
-      <li>Delegating goal pursuit changes how you think about solving the problem</li>
-    </ul>
-    <p><strong>Weekly Practice:</strong> <em>How else can agents help in my repo?</em></p>
-    <div class="section-img"><img src="images/image8.webp" alt="Continuous improvement" loading="lazy"></div>
+  <!-- SLIDE 10: Iterative (image RIGHT) -->
+  <section class="slide" id="iterative">
+    <div class="two-col img-right">
+      <div class="col-text">
+        <h2>Frame quality improvement as a continuous iterative goal</h2>
+        <ul>
+          <li>Have dialogues with the coding assistant and with the repo itself about how you might add new procedures</li>
+          <li>Delegating goal pursuit changes how you think about solving the problem</li>
+        </ul>
+        <p><strong>Weekly Practice:</strong> <em>How else can agents help in my repo?</em></p>
+      </div>
+      <div class="col-img">
+        <img src="images/image8.webp" alt="Continuous improvement" loading="lazy">
+      </div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 9: Virtual Team -->
-  <section class="section" id="virtual-team">
+  <!-- SLIDE 11: Virtual Team (no image) -->
+  <section class="slide" id="virtual-team">
     <h2>How do non-AI dev teams ensure quality?</h2>
     <p>Encode your <a href="https://github.com/rysweet/amplihack/blob/main/.claude/workflow/DEFAULT_WORKFLOW.md" target="_blank">development workflows</a> into the AI work.</p>
     <p>Use <a href="https://github.com/rysweet/amplihack/tree/main/.claude/agents/amplihack" target="_blank">Subagents</a> as your virtual team:</p>
@@ -320,25 +414,43 @@
       <li>Integration Testing</li>
       <li>…and probably many more steps specific to your team</li>
     </ul>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 10: Reinforce -->
-  <section class="section" id="reinforce">
-    <div class="callout-block">
-      <p class="quote">"But I wrote it down and the model just committed to main and went cowboy!"</p>
-      <p class="follow">You have to <em>constantly reinforce</em> the best practices and the workflows.</p>
+  <!-- SLIDE 12: Cowboy (image LEFT) -->
+  <section class="slide" id="cowboy">
+    <div class="two-col img-left">
+      <div class="col-text">
+        <div class="callout-block">
+          <p class="quote">"But I wrote it down and the model just committed to main and went cowboy!"</p>
+          <p class="follow">You have to <em>constantly reinforce</em> the best practices and the workflows.</p>
+        </div>
+      </div>
+      <div class="col-img">
+        <img src="images/image9.webp" alt="Cowboy coding" loading="lazy">
+      </div>
     </div>
-    <div class="section-img"><img src="images/image9.webp" alt="Cowboy coding" loading="lazy"></div>
-
-    <div class="tip">
-      <span class="tip-label">Tip</span>
-      <p>Always watch for the model skipping your instructions – ask it repeatedly if it followed the workflow, used the correct tool, etc.</p>
-    </div>
-    <div class="section-img"><img src="images/image10.webp" alt="Watch for skipping" loading="lazy"></div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 11: Guidance to Code -->
-  <section class="section" id="guidance-to-code">
+  <!-- SLIDE 13: Watch for skipping (image RIGHT) -->
+  <section class="slide" id="watch-skipping">
+    <div class="two-col img-right">
+      <div class="col-text">
+        <div class="tip">
+          <span class="tip-label">Tip</span>
+          <p>Always watch for the model skipping your instructions – ask it repeatedly if it followed the workflow, used the correct tool, etc.</p>
+        </div>
+      </div>
+      <div class="col-img">
+        <img src="images/image10.webp" alt="Watch for skipping" loading="lazy">
+      </div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <!-- SLIDE 14: Guidance to Code (no image) -->
+  <section class="slide" id="guidance-to-code">
     <h2>Moving from Guidance to Code</h2>
     <ul>
       <li>Run <a href="https://rysweet.github.io/amplihack/recipes/" target="_blank">deterministic workflows</a></li>
@@ -346,24 +458,32 @@
       <li>Compose loops into workflows that run in code</li>
       <li>Turn your NL documented workflow into a <a href="https://github.com/rysweet/amplihack/blob/main/amplifier-bundle/recipes/default-workflow.yaml" target="_blank">deterministically evaluated workflow</a> using these loops and tools</li>
     </ul>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 12: Outside-in -->
-  <section class="section" id="outside-in">
-    <h2>Build your QA Team: Outside-in Agentic Testing</h2>
-    <p>Define the user and data flows and build agents to exercise them:</p>
-    <ul>
-      <li>Use your spec or your UI design to derive <a href="https://github.com/rysweet/amplihack/tree/main/.claude/skills/e2e-outside-in-test-generator" target="_blank">e2e user flows</a></li>
-      <li>Build agents that simply use your product – the same ways that a user would</li>
-      <li>Build Skills that know how to invoke those agents</li>
-      <li>Build <a href="https://github.com/rysweet/amplihack/tree/main/.claude/skills/outside-in-testing" target="_blank">outside-in-testing</a> into your workflow at multiple stages</li>
-    </ul>
-    <p><a href="https://rysweet.github.io/gadugi-agentic-test/" target="_blank">→ Gadugi Agentic Test</a></p>
-    <div class="section-img"><img src="images/image11.webp" alt="Outside-in testing" loading="lazy"></div>
+  <!-- SLIDE 15: Outside-in (image LEFT) -->
+  <section class="slide" id="outside-in">
+    <div class="two-col img-left">
+      <div class="col-text">
+        <h2>Build your QA Team: Outside-in Agentic Testing</h2>
+        <p>Define the user and data flows and build agents to exercise them:</p>
+        <ul>
+          <li>Use your spec or your UI design to derive <a href="https://github.com/rysweet/amplihack/tree/main/.claude/skills/e2e-outside-in-test-generator" target="_blank">e2e user flows</a></li>
+          <li>Build agents that simply use your product – the same ways that a user would</li>
+          <li>Build Skills that know how to invoke those agents</li>
+          <li>Build <a href="https://github.com/rysweet/amplihack/tree/main/.claude/skills/outside-in-testing" target="_blank">outside-in-testing</a> into your workflow at multiple stages</li>
+        </ul>
+        <p><a href="https://rysweet.github.io/gadugi-agentic-test/" target="_blank">→ Gadugi Agentic Test</a></p>
+      </div>
+      <div class="col-img">
+        <img src="images/image11.webp" alt="Outside-in testing" loading="lazy">
+      </div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 13: Convergence -->
-  <section class="section" id="convergence">
+  <!-- SLIDE 16: Convergence (no image) -->
+  <section class="slide" id="convergence">
     <h2>Convergence: steering the model to the good code</h2>
     <p>Have it consider every piece from multiple angles. You must drive multiple <em>quality loops</em> from different points of view:</p>
     <ul>
@@ -376,35 +496,61 @@
     </ul>
     <p>Look for: secure sources/sinks, type-safety, poor exception handling, <a href="https://github.com/rysweet/amplihack/tree/main/.claude/skills/silent-degradation-audit" target="_blank">silent "fallbacks"</a>, stubs, TODOs, faked data, mocks outside tests, fragile regexes, hard-coded values…</p>
     <p><strong>Must do MULTIPLE passes from MULTIPLE subagents</strong> – layers and layers – until you converge on zero <a href="https://github.com/rysweet/amplihack/blob/main/.claude/skills/quality-audit/SKILL.md" target="_blank">quality discoveries</a>.</p>
-    <div class="full-img"><img src="images/image12.webp" alt="Quality convergence diagram" loading="lazy"></div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 14: Context -->
-  <section class="section" id="context">
+  <!-- SLIDE 17: Convergence diagram (full image) -->
+  <section class="slide" id="convergence-diagram">
+    <div class="full-img">
+      <img src="images/image12.webp" alt="Quality convergence diagram" loading="lazy">
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <!-- SLIDE 18: Build Context (image RIGHT) -->
+  <section class="slide" id="context">
     <h2>Build Context Specific to your Repo and Tech</h2>
     <p>The opposite of context poisoning – use <code>Agents.md</code> files or <code>copilot-instructions.md</code> files at strategic locations in the codebase to help build the correct context.</p>
     <p>Build Skills that are specific to things you are working with and keep them in your repo or in a plugin you use.</p>
     <p>This is especially important for internal tools/idioms/tech that is outside the training set (e.g.: GQL).</p>
     <p><a href="https://github.com/rysweet/agent-kgpacks" target="_blank">→ agent-kgpacks</a></p>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
-  <!-- Section 15: Closing -->
-  <section class="section" id="closing">
-    <div class="callout-block">
-      <p class="quote">Code quality is like laundry — you have to do it every day.</p>
+  <!-- SLIDE 19: Laundry (image LEFT) -->
+  <section class="slide" id="laundry">
+    <div class="two-col img-left">
+      <div class="col-text">
+        <div class="callout-block">
+          <p class="quote">Code quality is like laundry — you have to do it every day.</p>
+        </div>
+      </div>
+      <div class="col-img">
+        <img src="images/image13.webp" alt="Code quality is like laundry" loading="lazy">
+      </div>
     </div>
-    <div class="section-img"><img src="images/image13.webp" alt="Code quality is like laundry" loading="lazy"></div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
 
-    <div class="tip">
-      <span class="tip-label">Tip</span>
-      <p>Before finishing, stop and ask:</p>
-      <ul>
-        <li>"How else would you improve this PR?"</li>
-        <li>"What else could we do to improve quality / resilience / ease of use…?"</li>
-        <li>"How could we examine this code even more thoroughly?"</li>
-      </ul>
+  <!-- SLIDE 20: Final Tip (image RIGHT) -->
+  <section class="slide" id="closing">
+    <div class="two-col img-right">
+      <div class="col-text">
+        <div class="tip">
+          <span class="tip-label">Tip</span>
+          <p>Before finishing, stop and ask:</p>
+          <ul>
+            <li>"How else would you improve this PR?"</li>
+            <li>"What else could we do to improve quality / resilience / ease of use…?"</li>
+            <li>"How could we examine this code even more thoroughly?"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-img">
+        <img src="images/image14.webp" alt="Ask for improvements" loading="lazy">
+      </div>
     </div>
-    <div class="section-img"><img src="images/image14.webp" alt="Ask for improvements" loading="lazy"></div>
+    <div class="annotation"><!-- Add your notes here --></div>
   </section>
 
   <div class="back-top">

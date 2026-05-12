@@ -1,7 +1,8 @@
 const { test, expect } = require('@playwright/test');
 
 const TOTAL_SLIDES = 20;
-const PRESENTATION_URL = 'file:///tmp/agentic-coding-presentations/talks/recursive-reflective-robots/index.html';
+const LONGFORM_SECTIONS = 19;
+const PRESENTATION_URL = 'file:///home/rysweet/src/profile/agentic-coding-presentations/talks/recursive-reflective-robots/index.html';
 
 // All hyperlinks from the presentation
 const EXPECTED_LINKS = [
@@ -222,20 +223,20 @@ test.describe('Hyperlinks', () => {
 });
 
 // ============= LONGFORM VERSION TESTS =============
-const LONGFORM_URL = 'file:///tmp/agentic-coding-presentations/talks/recursive-reflective-robots/longform.html';
+const LONGFORM_URL = 'file:///home/rysweet/src/profile/agentic-coding-presentations/talks/recursive-reflective-robots/longform.html';
 
 test.describe('Longform Version', () => {
   test('page loads and has all 15 sections', async ({ page }) => {
     await page.goto(LONGFORM_URL);
-    const sections = await page.locator('.content .section').count();
-    expect(sections).toBe(15);
+    const sections = await page.locator('.content .slide').count();
+    expect(sections).toBe(LONGFORM_SECTIONS);
   });
 
   test('table of contents links work', async ({ page }) => {
     await page.goto(LONGFORM_URL);
     const tocLinks = page.locator('.toc a');
     const count = await tocLinks.count();
-    expect(count).toBe(15);
+    expect(count).toBe(LONGFORM_SECTIONS);
 
     for (let i = 0; i < count; i++) {
       const href = await tocLinks.nth(i).getAttribute('href');
@@ -275,7 +276,7 @@ test.describe('Longform Version', () => {
 
   test('text is readable - font sizes and contrast', async ({ page }) => {
     await page.goto(LONGFORM_URL);
-    const textEls = page.locator('.content p, .content li, .content h2, .content h3');
+    const textEls = page.locator('.content .slide p, .content .slide li, .content .slide h2, .content .slide h3');
     const count = await textEls.count();
     for (let i = 0; i < Math.min(count, 30); i++) {
       const el = textEls.nth(i);
