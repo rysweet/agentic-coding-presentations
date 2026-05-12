@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Coding Learning Session — Longform</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root { --bg: #0d1117; --surface: #161b22; --border: #30363d; --text: #c9d1d9; --text-bright: #f0f6fc; --accent: #0F9ED5; --orange: #E97132; --muted: #8b949e; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; margin: 0; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  strong { color: var(--text-bright); } em { color: var(--orange); font-style: normal; font-weight: 600; }
+  .version-nav { text-align: center; padding: 16px; background: var(--surface); border-bottom: 1px solid var(--border); font-size: 0.9em; }
+  .hero { position: relative; min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 32px; background: url('images/image1.webp') center center / cover no-repeat; border-bottom: 1px solid var(--border); }
+  .hero::before { content: ''; position: absolute; inset: 0; background: rgba(13,17,23,0.78); }
+  .hero > * { position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(2em, 5vw, 3em); color: #fff; margin: 0 0 16px; font-weight: 800; max-width: 900px; }
+  .hero .subtitle { font-size: 1.2em; color: var(--accent); margin: 0 0 20px; }
+  .hero .meta { font-size: 1em; color: #aaa; }
+  .content { max-width: 1000px; margin: 0 auto; padding: 0 32px 80px; }
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px 32px; margin: 48px 0; }
+  .toc h3 { margin-top: 0; color: var(--text-bright); } .toc ol { padding-left: 20px; margin: 0; } .toc li { margin-bottom: 6px; }
+  .slide { padding: 48px 0; border-bottom: 1px solid var(--border); }
+  .slide:last-of-type { border-bottom: none; }
+  .slide h2 { font-size: 1.8em; color: var(--text-bright); margin: 0 0 20px; }
+  .slide h3 { font-size: 1.2em; color: var(--orange); margin: 20px 0 12px; }
+  .slide p { margin: 0 0 14px; } .slide ul { margin: 0 0 14px; padding-left: 24px; } .slide li { margin-bottom: 6px; }
+  .two-col { display: flex; gap: 40px; align-items: flex-start; }
+  .two-col.img-right { flex-direction: row; } .two-col.img-left { flex-direction: row-reverse; }
+  .two-col .col-text { flex: 1; min-width: 0; }
+  .two-col .col-img { flex: 0 0 42%; display: flex; align-items: flex-start; justify-content: center; }
+  .two-col .col-img img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+  .annotation { min-height: 48px; margin: 16px 0 0; padding: 16px 0; border-top: 1px dashed var(--border); color: var(--muted); font-size: 0.85em; font-style: italic; }
+  .back-top { text-align: center; padding: 40px; color: var(--muted); font-size: 0.9em; }
+  @media (max-width: 700px) { .two-col, .two-col.img-right, .two-col.img-left { flex-direction: column; } .two-col .col-img { flex: none; width: 100%; } }
+</style>
+</head>
+<body>
+<div class="version-nav">📊 <a href="index.html">View as slide deck</a> · 📜 You're reading the longform version</div>
+<div class="hero" id="top">
+  <h1>Agentic Coding Learning Session</h1>
+  <p class="subtitle">December 2025</p>
+  <p class="meta">Ryan Sweet</p>
+</div>
+<div class="content">
+  <nav class="toc"><h3>Contents</h3><ol>
+      <li><a href="#slide-1">"I was a software engineer.Now I manage robots."</a></li>
+      <li><a href="#slide-2">"I was a researcher.Now I'm expected to use robots to make software"</a></li>
+      <li><a href="#slide-3">"I was a great PM. Now I'm expected to build working systems with AI"</a></li>
+      <li><a href="#slide-4">Your Expertise Matters More Than Ever</a></li>
+      <li><a href="#slide-5">"But I tried this stuff and it screwed up!"</a></li>
+      <li><a href="#slide-6">Thinking About Thinking</a></li>
+      <li><a href="#slide-7">What is Agentic Engineering?</a></li>
+      <li><a href="#slide-8">"But I don't trust it"</a></li>
+      <li><a href="#slide-9">"But I built my expertise over years… How will new people get that skill?"</a></li>
+      <li><a href="#slide-10">Crawl, Walk, Run is Going Away</a></li>
+      <li><a href="#slide-11">What is the loop that gets you to green?</a></li>
+      <li><a href="#slide-12">Goal Seeking Agents as Nodes in a Workflow</a></li>
+  </ol></nav>
+
+  <section class="slide" id="slide-1">
+    <div class="two-col img-right">
+      <div class="col-text"><h2>"I was a software engineer.<br>Now I manage robots."</h2></div>
+      <div class="col-img"><img src="images/image1.webp" alt="Slide 1" loading="lazy"></div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-2">
+    <div class="two-col img-left">
+      <div class="col-text"><h2>"I was a researcher.<br>Now I'm expected to use robots to make software"</h2></div>
+      <div class="col-img"><img src="images/image2.webp" alt="Slide 2" loading="lazy"></div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-3">
+    <div class="two-col img-right">
+      <div class="col-text"><h2>"I was a great PM. Now I'm expected to build working systems with AI"</h2></div>
+      <div class="col-img"><img src="images/image3.webp" alt="Slide 3" loading="lazy"></div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-4">
+    <h2>Your Expertise Matters More Than Ever</h2><p>We actually need you to be a great engineer, researcher, or PM more than ever…</p><ul><li>Your job is changing, but you can put yourself in charge of how it changes</li><li>Following instructions, no matter how technical, is no longer that valuable</li><li>Your cognition, curiosity, and expertise is what makes the difference between vibe coding and building real software</li><li>Agentic Coding requires you to lean into how to teach your craft</li></ul>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-5">
+    <div class="two-col img-right">
+      <div class="col-text"><h2>"But I tried this stuff and it screwed up!"</h2><p>Most likely you are holding it wrong. I mean it.</p><ul><li>Off-the-shelf Copilot, Claude, Codex is unlikely to give you good results</li><li>We are in the era of craftspeople building their own tools</li><li>Your expertise took years to build. Now you need to invest in how to codify it</li><li>Think about the AI as a very smart, somewhat forgetful intern</li></ul><p><a href="https://www.goodreads.com/book/show/10569.On_Writing" target="_blank">→ On Writing by Stephen King</a></p></div>
+      <div class="col-img"><img src="images/image4.webp" alt="Slide 5" loading="lazy"></div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-6">
+    <div class="two-col img-left">
+      <div class="col-text"><h2>Thinking About Thinking</h2><ul><li>How do smart groups of human experts organize complex work?</li><li>What problem am I trying to solve?</li><li>What outcome do I want?</li><li>What is the thought process that gets me to a quality solution?</li><li>Can I make that process into a tool?</li><li>How to structure an agentic pattern to aim at the desired outcome?</li><li>How do you build reliability into an untrustworthy system?</li></ul></div>
+      <div class="col-img"><img src="images/image5.webp" alt="Slide 6" loading="lazy"></div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-7">
+    <h2>What is Agentic Engineering?</h2><ul><li>It's what you make of it</li><li>It's an opportunity</li><li>It's an exploration</li><li>It's taking all the same things we did before, as a team, and trying to scale them to guidelines, processes, and guardrails for AI agents</li><li>How can you use agents as <em>design elements</em> in your process?</li></ul>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-8">
+    <h2>"But I don't trust it"</h2><p>You should NOT trust it. Use that. Lean into it.</p><ul><li>What system would you build to find all the places it failed, lied, or made a mistake?</li><li>Pit multiple AI against one another with the explicit mission of not trusting one another</li><li>Skepticism is an asset. Embrace it.</li><li>Recursion, depth, and systems of checks and balances keep us productive and safe</li></ul>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-9">
+    <h2>"But I built my expertise over years… How will new people get that skill?"</h2><ul><li>My first programming language was assembler on an 8bit CPU. I can't do that anymore — but it helped me understand each thing that came after</li><li>New practitioners must exercise critical thinking, tinkering, reasoning — more than ever before</li><li>The ones that succeed will take things apart to learn how they work</li><li>Eval is an excellent place to build skills — it forces structured thinking</li></ul>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-10">
+    <h2>Crawl, Walk, Run is Going Away</h2><p>You must lead with high ambition — <em>Explore, Reach, Refine</em></p><ul><li>The cost of failure is trending toward zero</li><li>The upside of ambitious experiments is high</li><li>We all need to lean in to reaching for things that might not be (yet) possible</li><li>The most impactful advances have come from reaching for big changes</li></ul>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-11">
+    <h2>What is the loop that gets you to green?</h2><ul><li>Should you spend more time on articulating your processes than on code review itself?</li><li>Convergence on quality is driven by:</li><li>Layers of recursion</li><li>Structured workflows</li><li>Continually refined quality gates</li><li>Eval across distributions</li></ul>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <section class="slide" id="slide-12">
+    <div class="two-col img-left">
+      <div class="col-text"><h2>Goal Seeking Agents as Nodes in a Workflow</h2><p><strong>AI Advantage:</strong> Think at scale in parallel</p><ul><li>What aspects of your workflow can be explored across a distribution of possible paths?</li><li>Fan out, aggregate, summarize…</li><li>Goal-seeking agents as <em>tools</em>, but also <em>part of the system</em></li><li>How many can you build to help you?</li></ul></div>
+      <div class="col-img"><img src="images/image6.webp" alt="Slide 12" loading="lazy"></div>
+    </div>
+    <div class="annotation"><!-- Add your notes here --></div>
+  </section>
+
+  <div class="back-top"><a href="#top">↑ Back to top</a> · <a href="index.html">View as slide deck →</a></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Autonomously Improving Systems with AI Agents</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css" id="theme">
+<style>
+  .reveal { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; }
+  .reveal .slides section { text-align: left; padding: 40px 60px; box-sizing: border-box; overflow: hidden; }
+  .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-weight: 700; letter-spacing: -0.02em; }
+  .reveal h1 { font-size: 2.2em; color: #fff; }
+  .reveal h2 { font-size: 1.5em; color: #0F9ED5; margin-bottom: 0.5em; }
+  .reveal h3 { font-size: 1.1em; color: #E97132; }
+  .reveal p, .reveal li { font-size: 0.72em; line-height: 1.5; color: #ddd; }
+  .reveal ul { margin-left: 1em; }
+  .reveal li { margin-bottom: 0.3em; }
+  .reveal a { color: #0F9ED5; text-decoration: underline; }
+  .reveal strong { color: #fff; }
+  .reveal em { color: #E97132; font-style: normal; font-weight: 600; }
+  .title-slide { text-align: center !important; }
+  .title-slide h2 { font-size: 1.8em; color: #fff; }
+  .two-col { display: flex; gap: 40px; align-items: flex-start; }
+  .two-col .col { flex: 1; }
+  .two-col .col-img { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .two-col .col-img img { max-height: 55vh; max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); object-fit: contain; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- Slide 1 -->
+<section class="title-slide" data-background-image="images/image1.webp" data-background-size="cover" data-background-opacity="0.25">
+  <h2>Building Autonomously Improving Systems with AI Agents</h2><p>O'Reilly Media · AI Superstream · November 2025</p>
+</section>
+
+<!-- Slide 2 -->
+<section>
+  <div class="two-col img-left">
+      <div class="col"><h2>What is Happening?</h2><p>Threat-actor adversaries will seek to build AI agents that can <em>autonomously improve their own code</em> to carry out new types of cyber attacks.</p><p>…therefore, security researchers must try to do the same — for defense and red-teaming.</p><p>That's a depressing (and exhausting) arms race.</p></div>
+      <div class="col-img"><img src="images/image2.webp" alt="Slide 2"></div>
+    </div>
+</section>
+
+<!-- Slide 3 -->
+<section>
+  <div class="two-col img-right">
+      <div class="col"><h2>Is There a Better Way?</h2><p>Programs that can improve their own code… what if everyone could build that?</p><p>Think of it like this: you try to raise your kids to have a growth mindset, a lifelong love of learning, collaboration skills, and you send them off into the world.</p><p><em>That is the "compiler" we need to build.</em></p></div>
+      <div class="col-img"><img src="images/image3.webp" alt="Slide 3"></div>
+    </div>
+</section>
+
+<!-- Slide 4 -->
+<section>
+  <h2>Agentic SW Engineering</h2><p>Still solving problems with software.</p><p>Only now Intelligence is both a <em>Tool</em> and a <em>Design Element</em></p>
+</section>
+
+<!-- Slide 5 -->
+<section>
+  <div class="two-col img-right">
+      <div class="col"><h2>Thinking About Thinking</h2><ul><li>How do smart groups of human experts organize complex work?</li><li>What problem am I trying to solve? What outcome do I want?</li><li>Can I make that thought process into a tool?</li><li>How do you build reliability into an untrustworthy system?</li></ul></div>
+      <div class="col-img"><img src="images/image4.webp" alt="Slide 5"></div>
+    </div>
+</section>
+
+<!-- Slide 6 -->
+<section>
+  <div class="two-col img-left">
+      <div class="col"><h2>Prompts → Commands/Workflows</h2><p>Patterns and Repeated Tasks → Code/Tools</p><ul><li>Workflow: Idea → Prompt → Issue → Worktree → TDD → PR → Code Review</li><li>CI Iteration Loop</li><li>"Eliminate all stubs, TODOs, Faked APIs…"</li><li>Build e2e demos of user stories as a completeness test</li></ul></div>
+      <div class="col-img"><img src="images/image5.webp" alt="Slide 6"></div>
+    </div>
+</section>
+
+<!-- Slide 7 -->
+<section>
+  <h2>Self-Improving Programs are Inevitable</h2><p>The response is a framework for <em>continuous, governed self-improvement</em>:</p><ul><li>Captures <strong>comprehensive self-knowledge</strong> so rapid edits stay explainable</li><li>Provides <strong>structured reflection loops</strong> to reconcile "what exists" with "what was intended"</li><li>Offers <strong>safe experimentation venues</strong> to validate changes before production</li></ul><p>But problems arise: intent drift, opaque decision paths, context poisoning…</p>
+</section>
+
+<!-- Slide 8 -->
+<section>
+  <h2>Self-Improvement Modes</h2><ul><li><strong>Quality-driven:</strong> Bug elimination, latency reduction, reliability</li><li><strong>Goal-driven:</strong> Meeting business or product objectives</li><li><strong>Design-thinking:</strong> Deepening empathy with user needs</li><li><strong>Evolutionary:</strong> Exploring solution space through controlled mutation</li><li><strong>Security/resilience:</strong> Responding to threats and vulnerabilities</li><li><strong>Compliance/policy:</strong> Aligning with regulatory changes</li><li><strong>Cost/efficiency:</strong> Optimizing resource usage</li><li><strong>Personalization:</strong> Tailoring behavior to preferences</li></ul>
+</section>
+
+<!-- Slide 9 -->
+<section>
+  <h2>Big Challenges and Open Questions</h2><p><em>Discuss, Engage, Build</em></p>
+</section>
+
+<!-- Slide 10 -->
+<section>
+  <h2>Ship of Theseus Problem</h2><p><em>Is it still my program?</em></p><p>Imagine a program that is adaptive — to user needs or real-world environment. What happens when it has changed enough that it's no longer the code that was "shipped"?</p><p>"Shipping" bits starts to mean something very different — the set of guardrails, the embodied intent, becomes as important as the code.</p>
+</section>
+
+<!-- Slide 11 -->
+<section>
+  <div class="two-col img-right">
+      <div class="col"><h2>…skepticism is an asset</h2><p>I have never regretted starting over.</p><p><em>Letting go of the code you have but keeping the best ideas leads to learning new things.</em></p></div>
+      <div class="col-img"><img src="images/image6.webp" alt="Slide 11"></div>
+    </div>
+</section>
+
+<!-- Slide 12 -->
+<section>
+  <div class="two-col img-left">
+      <div class="col"><h2>Transitional Stage</h2><ul><li>It is accelerating and there's no going back</li><li>Vibe Coding is just a waypoint, the destination is Self-Improving Systems</li><li>Keep putting more guardrails and feedback loops</li><li>Product requirements become part of the guardrails</li><li>Keep pushing boundaries of automation</li></ul></div>
+      <div class="col-img"><img src="images/image7.webp" alt="Slide 12"></div>
+    </div>
+</section>
+
+<!-- Slide 13 -->
+<section>
+  <div class="two-col img-right">
+      <div class="col"><h2>How Can You Get Started?</h2><ul><li>Grab Tools and SDKs</li><li>Give your Agents <em>Self-Reflection</em></li><li>Build Up Patterns Upon Patterns</li></ul></div>
+      <div class="col-img"><img src="images/image8.webp" alt="Slide 13"></div>
+    </div>
+</section>
+
+<!-- Slide 14 -->
+<section>
+  <div class="two-col img-left">
+      <div class="col"><h2>Let's Dive In! (Live Demo)</h2><ul><li>Injecting Context</li><li>Customizations</li><li>Building Tools and Skills</li><li>Reflection</li></ul></div>
+      <div class="col-img"><img src="images/image11.webp" alt="Slide 14"></div>
+    </div>
+</section>
+
+<!-- Slide 15 -->
+<section>
+  <h2>How Claude Code Works</h2><p>Event-Driven Agentic Loop</p><ul><li>Session Start/Stop, User Prompt/Agent Stop</li><li>Tool or Task I/O (Filesystem, Todo, Bash, Search, Fetch, Task)</li><li>Hooks allow user automation around the agentic loop</li></ul><p><a href="https://docs.claude.com/en/api/agent-sdk/overview" target="_blank">→ Agent SDK</a> · <a href="https://docs.claude.com/en/docs/claude-code/hooks" target="_blank">→ Hooks</a></p>
+</section>
+
+<!-- Slide 16 -->
+<section>
+  <h2>Reflection: Learn from how it's going</h2><ul><li><strong>UserPromptSubmit</strong> → Is the user frustrated?</li><li><strong>SessionStop</strong> → How did this session go?</li><li>Derive: New Guidelines, Guardrails, Skills, Tools</li><li>Build tools that help you build tools</li><li>Avoid recursion on reflection — use a semaphore</li></ul>
+</section>
+
+<!-- Slide 17 -->
+<section>
+  <h2>Injecting Context – Close the Loop</h2><ul><li>Take learning from Reflection and Build it in</li><li><strong>SessionStart, SubAgentStart</strong> → context for every session</li><li><strong>UserPromptSubmit</strong> → context for every turn</li></ul>
+</section>
+
+<!-- Slide 18 -->
+<section>
+  <h2>Customization</h2><p>One tiny way to use learning is for deep customization.</p><p>Drive behaviors or tool use that is specific to your project or your preferences.</p>
+</section>
+
+<!-- Slide 19 -->
+<section>
+  <h2>Building Guardrails</h2><p>If you give specific guidance over and over, you should bake it in.</p>
+</section>
+
+<!-- Slide 20 -->
+<section>
+  <h2>Building Tools, Commands, Agents, Skills</h2><ul><li><strong>Scripts/Tools:</strong> Deterministic steps, no semantic reasoning</li><li><strong>Commands:</strong> Instructions the agent reasons over</li><li><strong>Subagents:</strong> Specific behaviors and points of view</li><li><strong>Skills:</strong> Compilations of know-how</li></ul>
+</section>
+
+<!-- Slide 21 -->
+<section>
+  <h2>Building Outside Claude Code?</h2><ul><li>Claude Agent SDK as a general purpose SDK</li><li>Microsoft Agent Framework for workflow semantics</li><li>What processes do you want to learn from?</li><li>Where do you need guardrails?</li></ul>
+</section>
+
+</div>
+</div>
+<div style="position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:100;font-size:13px;"><a href="longform.html" style="color:#8b949e;text-decoration:none;">📜 Read as longform article</a></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>Reveal.initialize({ hash: true, slideNumber: true, width: 1280, height: 720, margin: 0.04, transition: 'slide' });</script>
+</body>
+</html>
