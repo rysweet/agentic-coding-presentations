@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Atlas – Forcing LLMs to Think in Graphs for Bug Hunting</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css" id="theme">
+<style>
+  .reveal { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; }
+  .reveal .slides section { text-align: left; padding: 40px 60px; box-sizing: border-box; overflow: hidden; }
+  .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-weight: 700; letter-spacing: -0.02em; }
+  .reveal h2 { font-size: 1.5em; color: #0F9ED5; margin-bottom: 0.5em; }
+  .reveal p, .reveal li { font-size: 0.72em; line-height: 1.5; color: #ddd; }
+  .reveal ul { margin-left: 1em; } .reveal li { margin-bottom: 0.3em; }
+  .reveal a { color: #0F9ED5; text-decoration: underline; }
+  .reveal strong { color: #fff; } .reveal em { color: #E97132; font-style: normal; font-weight: 600; }
+  .title-slide { text-align: center !important; }
+  .title-slide h2 { font-size: 1.8em; color: #fff; }
+  .two-col { display: flex; gap: 40px; align-items: flex-start; }
+  .two-col .col { flex: 1; } .two-col .col-img { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .two-col .col-img img { max-height: 55vh; max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); object-fit: contain; }
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-image="images/image1.webp" data-background-size="cover" data-background-opacity="0.25">
+  <h2>Code Atlas</h2>
+  <p style="font-size:1.1em;color:#0F9ED5;">Forcing LLMs to think in graphs for bug hunting in large codebases</p>
+  <p>Ryan Sweet · March 2026</p>
+</section>
+
+<section>
+  <h2>What is the need?</h2>
+  <ul>
+    <li>Bugs in larger codebases aren't obvious until relationships are traced across modules</li>
+    <li>Only so much information can fit in context and attention</li>
+    <li>API contracts drift</li>
+    <li>Docs become stale (or confidently mask stale code)</li>
+    <li>Dependency and data flows don't always stick out easily</li>
+    <li>The result: <em>hidden bugs</em> that don't surface without deeper introspection</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Why Graphs?</h2>
+  <ul>
+    <li>Graphs track relationships – many ways to view code as a graph</li>
+    <li>Developers think in graphs</li>
+    <li>AST, filesystem layout, call stack, data flow, dependencies, user scenarios, CI processes</li>
+    <li>But <em>LLMs don't naturally "think" about code this way</em></li>
+    <li>By asking the LLM to build graphs, it structures information in ways that cause it to look at the code differently</li>
+  </ul>
+</section>
+
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Graph-Building Finds Bugs</h2>
+      <p>Building docs for user-data flows kept turning up bugs that were buried deep (e.g. silently trimming an array to one element in a return).</p>
+      <p>Asking questions like <em>"look for more bugs of this type"</em> led to the LLM looking at adjacent categories altogether.</p>
+    </div>
+    <div class="col-img"><img src="images/image2.webp" alt="Bug discovery"></div>
+  </div>
+</section>
+
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Experiment: Use GraphViz to model the AST</h2>
+      <ul>
+        <li><a href="https://graphviz.org/" target="_blank">Graphviz</a> is a text-to-graph rendering library</li>
+        <li>DOT language format – very expressive</li>
+        <li>Difficult to learn but common in the training set</li>
+        <li>Can render to SVG, PDF, interactive JS</li>
+        <li><em>Asking the LLM to use treesitter+Graphviz found new bugs!</em></li>
+      </ul>
+    </div>
+    <div class="col-img"><img src="images/image3.webp" alt="Graphviz AST"></div>
+  </div>
+</section>
+
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Mermaid: Markdown Integrated Diagramming</h2>
+      <ul>
+        <li>Mermaid works natively in GitHub – the LLM knows it well</li>
+        <li>Less expressive than DOT, but also less complex</li>
+        <li>Could I get the same effect from Mermaid diagrams?</li>
+      </ul>
+    </div>
+    <div class="col-img"><img src="images/image4.webp" alt="Mermaid diagrams"></div>
+  </div>
+</section>
+
+<section>
+  <h2>Mermaid vs Graphviz: Results</h2>
+  <table style="font-size:0.6em;color:#ddd;border-collapse:collapse;width:100%;">
+    <tr style="border-bottom:1px solid #30363d;"><th style="text-align:left;padding:8px;">Repo</th><th>Shared</th><th>Mermaid-only</th><th>Graphviz-only</th></tr>
+    <tr><td style="padding:8px;">amplihack-memory-lib</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td style="padding:8px;">amplihack-recipe-runner</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td style="padding:8px;">amplihack-xpia-defender</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td style="padding:8px;">amplihack-agent-eval</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td style="padding:8px;">amplihack (main)</td><td>✓</td><td>—</td><td>✓</td></tr>
+  </table>
+</section>
+
+<section>
+  <div class="two-col">
+    <div class="col">
+      <h2>Bonus: Create docs at the same time!</h2>
+      <p>By making diagrams of the code from different points of view it helps create good docs.</p>
+    </div>
+    <div class="col-img"><img src="images/image5.webp" alt="Documentation bonus"></div>
+  </div>
+</section>
+
+</div></div>
+<div style="position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:100;font-size:13px;"><a href="longform.html" style="color:#8b949e;text-decoration:none;">📜 Read as longform article</a></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>Reveal.initialize({ hash: true, slideNumber: true, width: 1280, height: 720, margin: 0.04, transition: 'slide' });</script>
+</body>
+</html>

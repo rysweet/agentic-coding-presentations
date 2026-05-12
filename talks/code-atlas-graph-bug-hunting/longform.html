@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Atlas – Longform</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root { --bg: #0d1117; --surface: #161b22; --border: #30363d; --text: #c9d1d9; --text-bright: #f0f6fc; --accent: #0F9ED5; --orange: #E97132; --muted: #8b949e; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; margin: 0; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  strong { color: var(--text-bright); } em { color: var(--orange); font-style: normal; font-weight: 600; }
+  .version-nav { text-align: center; padding: 16px; background: var(--surface); border-bottom: 1px solid var(--border); font-size: 0.9em; }
+  .hero { position: relative; min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 32px; background: url('images/image1.webp') center center / cover no-repeat; border-bottom: 1px solid var(--border); }
+  .hero::before { content: ''; position: absolute; inset: 0; background: rgba(13,17,23,0.78); }
+  .hero > * { position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(2em, 5vw, 3em); color: #fff; margin: 0 0 16px; font-weight: 800; }
+  .hero .subtitle { font-size: 1.2em; color: var(--accent); margin: 0 0 20px; }
+  .hero .meta { font-size: 1em; color: #aaa; }
+  .content { max-width: 1000px; margin: 0 auto; padding: 0 32px 80px; }
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px 32px; margin: 48px 0; }
+  .toc h3 { margin-top: 0; color: var(--text-bright); } .toc ol { padding-left: 20px; margin: 0; } .toc li { margin-bottom: 6px; }
+  .slide { padding: 48px 0; border-bottom: 1px solid var(--border); }
+  .slide:last-of-type { border-bottom: none; }
+  .slide h2 { font-size: 1.8em; color: var(--text-bright); margin: 0 0 20px; }
+  .slide p { margin: 0 0 14px; } .slide ul { margin: 0 0 14px; padding-left: 24px; } .slide li { margin-bottom: 6px; }
+  .two-col { display: flex; gap: 40px; align-items: flex-start; }
+  .two-col.img-right { flex-direction: row; } .two-col.img-left { flex-direction: row-reverse; }
+  .two-col .col-text { flex: 1; min-width: 0; }
+  .two-col .col-img { flex: 0 0 42%; display: flex; align-items: flex-start; justify-content: center; }
+  .two-col .col-img img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+  .annotation { min-height: 48px; margin: 16px 0 0; padding: 16px 0; border-top: 1px dashed var(--border); color: var(--muted); font-size: 0.85em; font-style: italic; }
+  .back-top { text-align: center; padding: 40px; color: var(--muted); font-size: 0.9em; }
+  @media (max-width: 700px) { .two-col, .two-col.img-right, .two-col.img-left { flex-direction: column; } .two-col .col-img { flex: none; width: 100%; } }
+</style>
+</head>
+<body>
+<div class="version-nav">📊 <a href="index.html">View as slide deck</a> · 📜 You're reading the longform version</div>
+<div class="hero" id="top">
+  <h1>Code Atlas</h1>
+  <p class="subtitle">Forcing LLMs to think in graphs for bug hunting in large codebases</p>
+  <p class="meta">Ryan Sweet · March 2026</p>
+</div>
+<div class="content">
+  <nav class="toc"><h3>Contents</h3><ol>
+    <li><a href="#need">What is the need?</a></li>
+    <li><a href="#why-graphs">Why Graphs?</a></li>
+    <li><a href="#finds-bugs">Graph-Building Finds Bugs</a></li>
+    <li><a href="#graphviz">GraphViz and the AST</a></li>
+    <li><a href="#mermaid">Mermaid Diagrams</a></li>
+    <li><a href="#results">Mermaid vs Graphviz Results</a></li>
+    <li><a href="#docs">Bonus: Docs at the Same Time</a></li>
+  </ol></nav>
+
+  <section class="slide" id="need">
+    <h2>What is the need?</h2>
+    <ul>
+      <li>Bugs in larger codebases aren't obvious until relationships are traced across modules</li>
+      <li>Only so much information can fit in context and attention</li>
+      <li>API contracts drift</li>
+      <li>Docs become stale (or confidently mask stale code)</li>
+      <li>Dependency and data flows don't always stick out easily</li>
+      <li>The result: <em>hidden bugs</em> that don't surface without deeper introspection</li>
+    </ul>
+    <div class="annotation"></div>
+  </section>
+
+  <section class="slide" id="why-graphs">
+    <h2>Why Graphs?</h2>
+    <ul>
+      <li>Graphs track relationships – many ways to view code as a graph</li>
+      <li>Developers think in graphs</li>
+      <li>AST, filesystem layout, call stack, data flow, dependencies, user scenarios, CI processes</li>
+      <li>But <em>LLMs don't naturally "think" about code this way</em></li>
+      <li>By asking the LLM to build graphs, it structures information in ways that cause it to look at the code differently</li>
+    </ul>
+    <div class="annotation"></div>
+  </section>
+
+  <section class="slide" id="finds-bugs">
+    <div class="two-col img-right">
+      <div class="col-text">
+        <h2>Graph-Building Finds Bugs</h2>
+        <p>Building docs for user-data flows kept turning up bugs that were buried deep (e.g. silently trimming an array to one element in a return).</p>
+        <p>Asking questions like <em>"look for more bugs of this type"</em> led to the LLM looking at adjacent categories altogether.</p>
+      </div>
+      <div class="col-img"><img src="images/image2.webp" alt="Bug discovery" loading="lazy"></div>
+    </div>
+    <div class="annotation"></div>
+  </section>
+
+  <section class="slide" id="graphviz">
+    <div class="two-col img-left">
+      <div class="col-text">
+        <h2>Experiment: GraphViz and the AST</h2>
+        <ul>
+          <li><a href="https://graphviz.org/" target="_blank">Graphviz</a> is a text-to-graph rendering library</li>
+          <li>DOT language format – very expressive</li>
+          <li>Difficult to learn but common in the training set</li>
+          <li>Can render to SVG, PDF, interactive JS</li>
+          <li><em>Asking the LLM to use treesitter+Graphviz found new bugs!</em></li>
+        </ul>
+      </div>
+      <div class="col-img"><img src="images/image3.webp" alt="Graphviz AST" loading="lazy"></div>
+    </div>
+    <div class="annotation"></div>
+  </section>
+
+  <section class="slide" id="mermaid">
+    <div class="two-col img-right">
+      <div class="col-text">
+        <h2>Mermaid: Markdown Integrated Diagramming</h2>
+        <ul>
+          <li>Mermaid works natively in GitHub – the LLM knows it well</li>
+          <li>Less expressive than DOT, but also less complex</li>
+          <li>Could I get the same effect from Mermaid diagrams?</li>
+        </ul>
+      </div>
+      <div class="col-img"><img src="images/image4.webp" alt="Mermaid diagrams" loading="lazy"></div>
+    </div>
+    <div class="annotation"></div>
+  </section>
+
+  <section class="slide" id="results">
+    <h2>Mermaid vs Graphviz: Results</h2>
+    <p>Testing across multiple repos showed both Mermaid and Graphviz triggered bug discoveries, with Graphviz finding additional issues in some repos due to its greater expressiveness.</p>
+    <div class="annotation"></div>
+  </section>
+
+  <section class="slide" id="docs">
+    <div class="two-col img-left">
+      <div class="col-text">
+        <h2>Bonus: Create Docs at the Same Time</h2>
+        <p>By making diagrams of the code from different points of view it helps create good docs.</p>
+      </div>
+      <div class="col-img"><img src="images/image5.webp" alt="Documentation bonus" loading="lazy"></div>
+    </div>
+    <div class="annotation"></div>
+  </section>
+
+  <div class="back-top"><a href="#top">↑ Back to top</a> · <a href="index.html">View as slide deck →</a></div>
+</div>
+</body>
+</html>
