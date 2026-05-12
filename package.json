@@ -1,0 +1,27 @@
+{
+  "name": "agentic-coding-presentations",
+  "version": "1.0.0",
+  "description": "A collection of talks on agentic coding practices.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rysweet/agentic-coding-presentations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rysweet/agentic-coding-presentations/issues"
+  },
+  "homepage": "https://github.com/rysweet/agentic-coding-presentations#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "playwright": "^1.60.0"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}

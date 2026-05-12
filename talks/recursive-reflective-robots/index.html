@@ -21,6 +21,8 @@
     font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
   }
   .reveal .slides section {
+    box-sizing: border-box;
+    overflow: hidden;
     text-align: left;
     padding: 40px 60px;
   }
@@ -67,6 +69,7 @@
   .two-col .col { flex: 1; }
   .two-col .col-img { flex: 1; display: flex; align-items: center; justify-content: center; }
   .two-col .col-img img {
+    object-fit: contain;
     max-height: 55vh;
     max-width: 100%;
     border-radius: 8px;
@@ -115,7 +118,7 @@
 <div class="slides">
 
 <!-- Slide 1: Title -->
-<section class="title-slide" data-background-image="images/image1.png" data-background-size="cover" data-background-opacity="0.25">
+<section class="title-slide" data-background-image="images/image1.webp" data-background-size="cover" data-background-opacity="0.25">
   <h1>Recursive, Reflective Robots Reap Real Rewards</h1>
   <p class="subtitle">How to iterate on quality in large scale AI coding projects</p>
   <p class="author">Ryan Sweet · rysweet@microsoft.com · March 2026</p>
@@ -132,7 +135,7 @@
       <p><em>Guess how common terrible code is on the internet?</em></p>
     </div>
     <div class="col-img">
-      <img src="images/image2.png" alt="Coding agents failure modes">
+      <img src="images/image2.webp" alt="Coding agents failure modes">
     </div>
   </div>
 </section>
@@ -146,7 +149,7 @@
       <p><em>Your job as an engineer is to help them converge on the good code.</em></p>
     </div>
     <div class="col-img">
-      <img src="images/image3.png" alt="Coding agents amazing capabilities">
+      <img src="images/image3.webp" alt="Coding agents amazing capabilities">
     </div>
   </div>
 </section>
@@ -178,7 +181,7 @@
       <p><a href="https://github.com/rysweet/amplihack/blob/main/.claude/context/PHILOSOPHY.md" target="_blank">→ Example: PHILOSOPHY.md</a></p>
     </div>
     <div class="col-img">
-      <img src="images/image4.png" alt="Development philosophy">
+      <img src="images/image4.webp" alt="Development philosophy">
     </div>
   </div>
 </section>
@@ -191,7 +194,7 @@
       <p>Point-in-time documents and unrelated logs, reports, summaries etc. all <em>distract your agents</em>.</p>
     </div>
     <div class="col-img">
-      <img src="images/image5.png" alt="Context poisoning">
+      <img src="images/image5.webp" alt="Context poisoning">
     </div>
   </div>
 </section>
@@ -224,7 +227,7 @@
       <p><a href="https://github.com/rysweet/amplihack/blob/main/.github/workflows/repo-guardian.md" target="_blank">→ Repo Guardian workflow</a></p>
     </div>
     <div class="col-img">
-      <img src="images/image6.png" alt="GitHub Agentic Workflows">
+      <img src="images/image6.webp" alt="GitHub Agentic Workflows">
     </div>
   </div>
 </section>
@@ -233,7 +236,7 @@
 <section class="image-slide">
   <h2>Think of your repo as an event driven system</h2>
   <p style="text-align:center;">Every change is a chance to trigger new work.</p>
-  <img src="images/image7.png" alt="Event driven system diagram">
+  <img src="images/image7.webp" alt="Event driven system diagram">
 </section>
 
 <!-- Slide 10: Continuous Iterative Goal -->
@@ -248,7 +251,7 @@
       <p><strong>Weekly Practice:</strong> <em>How else can agents help in my repo?</em></p>
     </div>
     <div class="col-img">
-      <img src="images/image8.png" alt="Continuous improvement">
+      <img src="images/image8.webp" alt="Continuous improvement">
     </div>
   </div>
 </section>
@@ -278,7 +281,7 @@
       <p class="callout-text">You have to <em>constantly reinforce</em> the best practices and the workflows.</p>
     </div>
     <div class="col-img">
-      <img src="images/image9.png" alt="Cowboy coding">
+      <img src="images/image9.webp" alt="Cowboy coding">
     </div>
   </div>
 </section>
@@ -287,7 +290,7 @@
 <section class="image-slide">
   <p><span class="tip-badge">Tip</span></p>
   <p style="font-size:1.1em; text-align:center; max-width:80%; margin:0 auto;">Always watch for the model skipping your instructions – ask it repeatedly if it followed the workflow, used the correct tool, etc.</p>
-  <img src="images/image10.jpeg" alt="Watch for skipping instructions">
+  <img src="images/image10.webp" alt="Watch for skipping instructions">
 </section>
 
 <!-- Slide 14: Moving from Guidance to Code -->
@@ -316,7 +319,7 @@
       <p><a href="https://rysweet.github.io/gadugi-agentic-test/" target="_blank">→ Gadugi Agentic Test</a></p>
     </div>
     <div class="col-img">
-      <img src="images/image11.jpeg" alt="Outside-in testing">
+      <img src="images/image11.webp" alt="Outside-in testing">
     </div>
   </div>
 </section>
@@ -339,7 +342,7 @@
 
 <!-- Slide 17: Diagram (image-only slide) -->
 <section class="image-slide">
-  <img src="images/image12.png" alt="Quality convergence diagram">
+  <img src="images/image12.webp" alt="Quality convergence diagram">
 </section>
 
 <!-- Slide 18: Build Context -->
@@ -355,7 +358,7 @@
 <section class="image-slide">
   <h2 style="text-align:center;">Code quality is like laundry</h2>
   <p style="text-align:center; font-size:1.2em;"><em>you have to do it every day</em></p>
-  <img src="images/image13.png" alt="Code quality is like laundry">
+  <img src="images/image13.webp" alt="Code quality is like laundry">
 </section>
 
 <!-- Slide 20: Final Tip -->
@@ -370,7 +373,7 @@
       </ul>
     </div>
     <div class="col-img">
-      <img src="images/image14.png" alt="Ask for improvements">
+      <img src="images/image14.webp" alt="Ask for improvements">
     </div>
   </div>
 </section>
@@ -378,6 +381,7 @@
 </div>
 </div>
 
+<div style="position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:100;font-size:13px;"><a href="longform.html" style="color:#8b949e;text-decoration:none;">📜 Read as longform article</a></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
 <script>
   Reveal.initialize({

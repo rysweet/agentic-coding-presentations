@@ -220,3 +220,80 @@ test.describe('Hyperlinks', () => {
     }
   });
 });
+
+// ============= LONGFORM VERSION TESTS =============
+const LONGFORM_URL = 'file:///tmp/agentic-coding-presentations/talks/recursive-reflective-robots/longform.html';
+
+test.describe('Longform Version', () => {
+  test('page loads and has all 15 sections', async ({ page }) => {
+    await page.goto(LONGFORM_URL);
+    const sections = await page.locator('.content .section').count();
+    expect(sections).toBe(15);
+  });
+
+  test('table of contents links work', async ({ page }) => {
+    await page.goto(LONGFORM_URL);
+    const tocLinks = page.locator('.toc a');
+    const count = await tocLinks.count();
+    expect(count).toBe(15);
+
+    for (let i = 0; i < count; i++) {
+      const href = await tocLinks.nth(i).getAttribute('href');
+      const target = page.locator(href);
+      await expect(target).toBeAttached();
+    }
+  });
+
+  test('all images load (webp)', async ({ page }) => {
+    await page.goto(LONGFORM_URL);
+    const images = page.locator('.content img');
+    const count = await images.count();
+    expect(count).toBeGreaterThan(0);
+
+    for (let i = 0; i < count; i++) {
+      const img = images.nth(i);
+      const src = await img.getAttribute('src');
+      expect(src).toContain('.webp');
+      // Scroll into view to trigger lazy loading
+      await img.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(200);
+      const naturalWidth = await img.evaluate(e => e.naturalWidth);
+      expect(naturalWidth, 'Image ' + src + ' failed to load').toBeGreaterThan(0);
+    }
+  });
+
+  test('all expected hyperlinks present', async ({ page }) => {
+    await page.goto(LONGFORM_URL);
+    const allHrefs = await page.evaluate(() => {
+      return Array.from(document.querySelectorAll('.content a[href^="http"]')).map(a => a.href);
+    });
+    for (const expected of EXPECTED_LINKS) {
+      const found = allHrefs.some(href => href === expected || href.includes(expected));
+      expect(found, 'Missing link: ' + expected).toBe(true);
+    }
+  });
+
+  test('text is readable - font sizes and contrast', async ({ page }) => {
+    await page.goto(LONGFORM_URL);
+    const textEls = page.locator('.content p, .content li, .content h2, .content h3');
+    const count = await textEls.count();
+    for (let i = 0; i < Math.min(count, 30); i++) {
+      const el = textEls.nth(i);
+      const fontSize = await el.evaluate(e => parseFloat(getComputedStyle(e).fontSize));
+      expect(fontSize).toBeGreaterThanOrEqual(14);
+    }
+  });
+
+  test('cross-links between slide and longform versions', async ({ page }) => {
+    // Longform links to slides
+    await page.goto(LONGFORM_URL);
+    const slideLink = page.locator('a[href="index.html"]');
+    await expect(slideLink.first()).toBeVisible();
+
+    // Slides link to longform
+    await page.goto(PRESENTATION_URL);
+    await page.waitForSelector('.reveal.ready');
+    const longformLink = page.locator('a[href="longform.html"]');
+    await expect(longformLink).toBeVisible();
+  });
+});
